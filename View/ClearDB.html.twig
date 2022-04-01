@@ -1,0 +1,37 @@
+{% extends "Master/MenuBghTemplate.html.twig" %}
+
+{#
+* Copyright (C) 2022 Carlos Garcia Gomez <carlos@facturascripts.com>
+* @Author Daniel Fernández Giménez <hola@danielfg.es>
+#}
+
+{% block body %}
+    <div class="bg-light pt-4 pb-5">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h1 class="h2">
+                        <i class="fas fa-database fa-fw"></i>
+                        {{ i18n.trans('reset-fs') }}
+                    </h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container" style="margin-top: -40px;">
+        <div class="row">
+            <div class="col">
+                <div class="card shadow mb-4">
+                    <div class="card-body">
+                        <p>{{ i18n.trans('cleardb-paragraph') }}</p>
+                        <form method="post">
+                            <button type="submit" name="action" value="reset-fs" class="btn btn-danger btn-spin-action">
+                                <i class="fas fa-times fa-fw"></i> {{ i18n.trans('reset') }}
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
