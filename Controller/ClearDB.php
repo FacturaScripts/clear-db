@@ -27,15 +27,12 @@ use FacturaScripts\Core\Base\DataBase;
  */
 class ClearDB extends Controller
 {
-    /**
-     * @return array
-     */
-    public function getPageData()
+    public function getPageData(): array
     {
         $data = parent::getPageData();
         $data['menu'] = 'admin';
-        $data['title'] = 'delete';
-        $data['icon'] = 'fas fa-database';
+        $data['title'] = 'reset-fs';
+        $data['icon'] = 'fas fa-trash-alt';
         return $data;
     }
 
@@ -60,6 +57,7 @@ class ClearDB extends Controller
                 return;
             }
         }
+
         $database->exec('SET FOREIGN_KEY_CHECKS = 1;');
         $database->commit();
         $this->toolBox()->cache()->clear();
