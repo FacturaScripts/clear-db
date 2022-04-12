@@ -1,4 +1,4 @@
-# CLearDb
+# ClearDb
 Permite eliminar todos los datos de la base de datos y restablecer FacturaScripts. Elimina todas las facturas, los albaranes, los pedidos, los presupuestos, los clientes, los productos, etc.
 - https://facturascripts.com/plugins/cleardb
 
