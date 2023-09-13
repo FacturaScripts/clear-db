@@ -1,7 +1,7 @@
 <?php
 /**
  * This file is part of ClearDB plugin for FacturaScripts
- * Copyright (C) 2022 Carlos Garcia Gomez <carlos@facturascripts.com>
+ * Copyright (C) 2022-2023 Carlos Garcia Gomez <carlos@facturascripts.com>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as
@@ -21,6 +21,7 @@ namespace FacturaScripts\Plugins\ClearDB\Controller;
 
 use FacturaScripts\Core\Base\Controller;
 use FacturaScripts\Core\Base\DataBase;
+use FacturaScripts\Core\Cache;
 
 /**
  * @author Daniel Fernández Giménez <hola@danielfg.es>
@@ -60,7 +61,9 @@ class ClearDB extends Controller
 
         $database->exec('SET FOREIGN_KEY_CHECKS = 1;');
         $database->commit();
-        $this->toolBox()->cache()->clear();
+
+        Cache::clear();;
+
         $this->redirect('AdminPlugins');
     }
 }
