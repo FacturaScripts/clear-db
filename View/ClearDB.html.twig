@@ -1,7 +1,7 @@
 {% extends "Master/MenuBghTemplate.html.twig" %}
 
 {#
-* Copyright (C) 2022-2023 Carlos Garcia Gomez <carlos@facturascripts.com>
+* Copyright (C) 2022-2024 Carlos Garcia Gomez <carlos@facturascripts.com>
 * @Author Daniel Fernández Giménez <hola@danielfg.es>
 #}
 
@@ -25,6 +25,7 @@
                     <div class="card-body">
                         <p>{{ trans('reset-fs-p') }}</p>
                         <form method="post">
+                            {{ formToken() }}
                             <button type="submit" name="action" value="reset-fs" class="btn btn-danger btn-spin-action">
                                 <i class="fas fa-trash-alt fa-fw"></i> {{ trans('delete') }}
                             </button>
