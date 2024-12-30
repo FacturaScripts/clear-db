@@ -22,6 +22,7 @@ namespace FacturaScripts\Plugins\ClearDB\Controller;
 use FacturaScripts\Core\Base\Controller;
 use FacturaScripts\Core\Base\DataBase;
 use FacturaScripts\Core\Cache;
+use FacturaScripts\Core\DbUpdater;
 use FacturaScripts\Core\Tools;
 
 /**
@@ -70,8 +71,9 @@ class ClearDB extends Controller
         $database->exec('SET FOREIGN_KEY_CHECKS = 1;');
         $database->commit();
 
-        Cache::clear();;
+        DbUpdater::rebuild();
+        Cache::clear();
 
-        $this->redirect('AdminPlugins');
+        $this->redirect('Wizard');
     }
 }
