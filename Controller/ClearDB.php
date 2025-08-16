@@ -34,7 +34,7 @@ class ClearDB extends Controller
         $data = parent::getPageData();
         $data['menu'] = 'admin';
         $data['title'] = 'reset-fs';
-        $data['icon'] = 'fas fa-trash-alt';
+        $data['icon'] = 'fa-solid fa-trash-alt';
         return $data;
     }
 

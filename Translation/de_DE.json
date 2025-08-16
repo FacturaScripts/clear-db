@@ -1,4 +1,4 @@
 {
-    "reset-fs": "Eliminar datos",
-    "reset-fs-p": "Se eliminarán todos los datos de FacturaScripts. esta acción no se puede deshacer. No se pueden recuperar los datos una vez borrados."
+    "reset-fs": "Daten löschen",
+    "reset-fs-p": "Alle Daten von FacturaScripts werden gelöscht. Diese Aktion kann nicht rückgängig gemacht werden. Die Daten können nicht wiederhergestellt werden, sobald sie gelöscht sind."
 }
