@@ -1,7 +1,7 @@
 <?php
 /**
  * This file is part of ClearDB plugin for FacturaScripts
- * Copyright (C) 2022-2024 Carlos Garcia Gomez <carlos@facturascripts.com>
+ * Copyright (C) 2022-2026 Carlos Garcia Gomez <carlos@facturascripts.com>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as
@@ -23,6 +23,7 @@ use FacturaScripts\Core\Base\Controller;
 use FacturaScripts\Core\Base\DataBase;
 use FacturaScripts\Core\Cache;
 use FacturaScripts\Core\DbUpdater;
+use FacturaScripts\Core\Telemetry;
 use FacturaScripts\Core\Tools;
 
 /**
@@ -30,6 +31,9 @@ use FacturaScripts\Core\Tools;
  */
 class ClearDB extends Controller
 {
+    /** @var bool */
+    public $telemetryRegistered = false;
+
     public function getPageData(): array
     {
         $data = parent::getPageData();
@@ -43,6 +47,10 @@ class ClearDB extends Controller
     {
         parent::privateCore($response, $user, $permissions);
 
+        // Comprobar si la instalación está registrada
+        $telemetry = Telemetry::init();
+        $this->telemetryRegistered = $telemetry->ready();
+
         if ($this->request->get('action', '') === 'reset-fs') {
             $this->resetFS();
         }
@@ -55,6 +63,22 @@ class ClearDB extends Controller
             return;
         } elseif (false === $this->validateFormToken()) {
             return;
+        }
+
+        // Verificar que el motor de base de datos sea MySQL o MariaDB
+        if (Tools::config('db_type') !== 'mysql') {
+            Tools::log()->warning('Este plugin solo es compatible con MySQL/MariaDB');
+            return;
+        }
+
+        // Desvincular la instalación si está registrada
+        $telemetry = Telemetry::init();
+        if ($telemetry->ready()) {
+            if (false === $telemetry->unlink()) {
+                Tools::log()->error('No se pudo desvincular la instalación');
+                return;
+            }
+            Tools::log()->info('Instalación desvinculada correctamente');
         }
 
         $database = new DataBase();
@@ -71,9 +95,19 @@ class ClearDB extends Controller
         $database->exec('SET FOREIGN_KEY_CHECKS = 1;');
         $database->commit();
 
+        // Eliminar archivos JSON de la carpeta MyFiles
+        $myFilesPath = FS_FOLDER . '/MyFiles/';
+        $filesToDelete = ['db-updater.json', 'db-changelog.json', 'migrations.json'];
+        foreach ($filesToDelete as $file) {
+            $filePath = $myFilesPath . $file;
+            if (file_exists($filePath)) {
+                unlink($filePath);
+            }
+        }
+
         DbUpdater::rebuild();
         Cache::clear();
 
-        $this->redirect('Wizard');
+        $this->redirect('login');
     }
 }

@@ -24,10 +24,18 @@
                 <div class="card shadow mb-4">
                     <div class="card-body">
                         <p>{{ trans('reset-fs-p') }}</p>
+                        {% if fsc.telemetryRegistered %}
+                            <div class="alert alert-warning">
+                                <i class="fa-solid fa-exclamation-triangle fa-fw"></i>
+                                {{ trans('telemetry-unlink-warning') }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="card-footer">
                         <form method="post">
                             {{ formToken() }}
                             <button type="submit" name="action" value="reset-fs" class="btn btn-danger btn-spin-action">
-                                <i class="fa-solid fa-trash-alt fa-fw"></i> {{ trans('delete') }}
+                                <i class="fa-solid fa-bomb fa-fw"></i> {{ trans('delete') }}
                             </button>
                         </form>
                     </div>
