@@ -1,4 +1,5 @@
 {
     "reset-fs": "Daten löschen",
-    "reset-fs-p": "Alle Daten von FacturaScripts werden gelöscht. Diese Aktion kann nicht rückgängig gemacht werden. Die Daten können nicht wiederhergestellt werden, sobald sie gelöscht sind."
+    "reset-fs-p": "Alle Daten von FacturaScripts werden gelöscht. Diese Aktion kann nicht rückgängig gemacht werden. Die Daten können nicht wiederhergestellt werden, sobald sie gelöscht sind.",
+    "telemetry-unlink-warning": "Al eliminar los datos se desvinculará automáticamente esta instalación de facturascripts.com"
 }

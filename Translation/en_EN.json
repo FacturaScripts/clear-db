@@ -1,5 +1,5 @@
 {
     "reset-fs": "Delete data",
     "reset-fs-p": "All FacturaScripts data will be deleted. This action can not be undone. Data cannot be recovered once deleted.",
-    "telemetry-unlink-warning": "Deleting the data will automatically unlink this installation from facturascripts.com"
+    "telemetry-unlink-warning": "Al eliminar los datos se desvinculará automáticamente esta instalación de facturascripts.com"
 }
