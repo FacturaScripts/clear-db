@@ -82,6 +82,11 @@ class ClearDB extends Controller
             Tools::log()->info('Instalación desvinculada correctamente');
         }
 
+        // Eliminar archivos subidos
+        foreach (AttachedFile::all() as $file) {
+            $file->delete();
+        }
+
         $database = new DataBase();
         $database->beginTransaction();
         $database->exec('SET FOREIGN_KEY_CHECKS = 0;');
@@ -106,9 +111,14 @@ class ClearDB extends Controller
             }
         }
 
-        // Eliminar archivos subidos
-        foreach (AttachedFile::all() as $file) {
-            $file->delete();
+        // Eliminar carpetas residuales de MyFiles (YYYY/MM)
+        if (is_dir($myFilesPath)) {
+            foreach (scandir($myFilesPath) as $year) {
+                if (preg_match('/^\d{4}$/', $year) && is_dir($myFilesPath . $year)) {
+                    fwrite(fopen('php://stdout', 'w'), print_r("borrao nigga", true) . "\n");
+                    Tools::folderDelete($myFilesPath . $year);
+                }
+            }
         }
 
         DbUpdater::rebuild();
