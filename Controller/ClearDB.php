@@ -23,6 +23,7 @@ use FacturaScripts\Core\Base\Controller;
 use FacturaScripts\Core\Base\DataBase;
 use FacturaScripts\Core\Cache;
 use FacturaScripts\Core\DbUpdater;
+use FacturaScripts\Core\Model\AttachedFile;
 use FacturaScripts\Core\Telemetry;
 use FacturaScripts\Core\Tools;
 
@@ -103,6 +104,11 @@ class ClearDB extends Controller
             if (file_exists($filePath)) {
                 unlink($filePath);
             }
+        }
+
+        // Eliminar archivos subidos
+        foreach (AttachedFile::all() as $file) {
+            $file->delete();
         }
 
         DbUpdater::rebuild();
