@@ -1,5 +1,5 @@
 {
     "reset-fs": "Reset danych",
     "reset-fs-p": "Zresetować wszystkie stawki",
-    "telemetry-unlink-warning": "Al eliminar los datos se desvinculará automáticamente esta instalación de facturascripts.com"
+    "telemetry-unlink-warning": "Usunięcie danych spowoduje automatyczne odłączenie tej instalacji od facturascripts.com"
 }

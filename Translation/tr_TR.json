@@ -1,0 +1,5 @@
+{
+    "reset-fs": "Verileri Sil",
+    "reset-fs-p": "FacturaScripts'teki tüm veriler silinecektir. Bu işlem geri alınamaz. Silindikten sonra veriler kurtarılamaz.",
+    "telemetry-unlink-warning": "Veriler silindiğinde bu kurulum facturascripts.com'dan otomatik olarak ayrılacaktır"
+}

@@ -1,5 +1,5 @@
 {
     "reset-fs": "Datuak ezabatu",
     "reset-fs-p": "FacturaScripts-eko datu guztiak ezabatuko dira. Ekintza hau ezin da desegin. Datuak ezin dira berreskuratu ezabatu ondoren.",
-    "telemetry-unlink-warning": "Al eliminar los datos se desvinculará automáticamente esta instalación de facturascripts.com"
+    "telemetry-unlink-warning": "Datuak ezabatzean, instalazio hau fakturascripts.com-etik automatikoki deslotuko da"
 }
