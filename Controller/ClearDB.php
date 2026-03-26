@@ -23,6 +23,7 @@ use FacturaScripts\Core\Base\Controller;
 use FacturaScripts\Core\Base\DataBase;
 use FacturaScripts\Core\Cache;
 use FacturaScripts\Core\DbUpdater;
+use FacturaScripts\Core\Model\AttachedFile;
 use FacturaScripts\Core\Telemetry;
 use FacturaScripts\Core\Tools;
 
@@ -81,6 +82,11 @@ class ClearDB extends Controller
             Tools::log()->info('Instalación desvinculada correctamente');
         }
 
+        // Eliminar archivos subidos
+        foreach (AttachedFile::all() as $file) {
+            $file->delete();
+        }
+
         $database = new DataBase();
         $database->beginTransaction();
         $database->exec('SET FOREIGN_KEY_CHECKS = 0;');
@@ -102,6 +108,15 @@ class ClearDB extends Controller
             $filePath = $myFilesPath . $file;
             if (file_exists($filePath)) {
                 unlink($filePath);
+            }
+        }
+
+        // Eliminar carpetas residuales de MyFiles (YYYY/MM)
+        if (is_dir($myFilesPath)) {
+            foreach (scandir($myFilesPath) as $year) {
+                if (preg_match('/^\d{4}$/', $year) && is_dir($myFilesPath . $year)) {
+                    Tools::folderDelete($myFilesPath . $year);
+                }
             }
         }
 
